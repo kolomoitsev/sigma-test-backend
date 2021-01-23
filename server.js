@@ -32,4 +32,6 @@ connection.once('open', () => {
 app.use(cors())
 app.use('/user', userApi);
 
-app.listen(config.PORT || process.env.port, () => console.log(`working on port ${config.PORT}`))
+const port = config.PORT || process.env.PORT
+
+app.listen(port , () => console.log(`working on port ${port}`))
