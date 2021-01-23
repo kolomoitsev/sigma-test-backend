@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-const {v4: uuidV4} = require('uuid');
+const { v4: uuidV4 } = require('uuid');
 
 const Token = require('../models/token.model')
 
-const {secret, tokens} = require('./../config.json').jwt
+const { secret, tokens } = require('./../config.json').jwt
 
 const generateAccessToken = (userId) => {
 
@@ -13,7 +13,7 @@ const generateAccessToken = (userId) => {
         type: tokens.access.type,
     }
 
-    const options = {expiresIn: tokens.access.expiresIn}
+    const options = { expiresIn: tokens.access.expiresIn }
 
     return jwt.sign(payload, secret, options)
 
@@ -26,7 +26,7 @@ const generateRefreshToken = () => {
         type: tokens.refresh.type,
     }
 
-    const options = {expiresIn: tokens.refresh.expiresIn}
+    const options = { expiresIn: tokens.refresh.expiresIn }
 
     return {
         id: payload.id,
@@ -37,7 +37,7 @@ const generateRefreshToken = () => {
 
 const replaceToken = async (tokenId, userId) => {
 
-    await Token.findOneAndRemove({userId})
+    await Token.findOneAndRemove({ userId })
         .exec()
         .then(async () => {
             await Token.create({
