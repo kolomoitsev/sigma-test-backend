@@ -1,12 +1,12 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-const USER = require('../models/user.model')
+const USER = require('../models/user.model');
 const jwt = require("jsonwebtoken");
-const bCrypt = require('bcrypt')
+const bCrypt = require('bcrypt');
 
-const helpers = require('./helpers')
-const { secret } = require('./../config.json').jwt
+const helpers = require('./helpers');
+const { secret } = require('./../config.json').jwt;
 const Token = require('../models/token.model');
 
 router

@@ -2,20 +2,20 @@ const jwt = require("jsonwebtoken");
 
 const { v4: uuidV4 } = require('uuid');
 
-const Token = require('../models/token.model')
+const Token = require('../models/token.model');
 
-const { secret, tokens } = require('./../config.json').jwt
+const { secret, tokens } = require('./../config.json').jwt;
 
 const generateAccessToken = (userId) => {
 
     const payload = {
         userId,
         type: tokens.access.type,
-    }
+    };
 
-    const options = { expiresIn: tokens.access.expiresIn }
+    const options = { expiresIn: tokens.access.expiresIn };
 
-    return jwt.sign(payload, secret, options)
+    return jwt.sign(payload, secret, options);
 
 }
 
@@ -24,14 +24,14 @@ const generateRefreshToken = () => {
     const payload = {
         id: uuidV4(),
         type: tokens.refresh.type,
-    }
+    };
 
-    const options = { expiresIn: tokens.refresh.expiresIn }
+    const options = { expiresIn: tokens.refresh.expiresIn };
 
     return {
         id: payload.id,
         token: jwt.sign(payload, secret, options)
-    }
+    };
 
 }
 
@@ -44,7 +44,7 @@ const replaceToken = async (tokenId, userId) => {
                 tokenId,
                 userId
             })
-        })
+        });
 
 }
 
@@ -68,7 +68,7 @@ const authenticateToken = async (req, res, next) => {
         }
     }
 
-    next()
+    next();
 
 }
 
